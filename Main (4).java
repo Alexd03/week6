@@ -11,6 +11,45 @@ function App() {
     startTime: null,
     endtime:null,
   }
+  
+  
 const [snippet, setSnippet] = useState('');
-const[user]
+const[userText, setUserText] = useState('');
+const[gameState, setGameState] = useState('initialGameState');
+  
+  
+function updateUserText(event){
+  const newusertext = event.target.value;
+  setUserText(newUsertext);
+if (newUsertext === snippet){
+  setGameState({
+    ...gameState,
+    victory: true,
+    endTime: new Date().getTime() - gameState.startTime,
+    })
+  }
 }
+function chooseSnippet(index){
+  setSnippet(buttonTextItems[index]);
+  setGameState({
+      ..intialGameState,
+    startTime:new Date().getTime(),
+  }
+               }
+ return(
+   <div>{}
+   
+    <h2>TypeRace</h2>
+    <hr/>
+    <h3>Snippet</h3>
+   <div>{snippet}</div>{
+}
+   <h4>{gameState.victory ? 'Done! Woot! time: ${gameState.endTime}ms' : null}</h4>
+   <input value={userText} onChange={updateUserText}/>
+   <hr/>
+   
+   {buttonTextItems.map((snippetText,index)=>
+    <button key={index} onClick={()=>  chooseNippet(index)}>{snippetText}</button>)}
+   </div>
+               
+};
